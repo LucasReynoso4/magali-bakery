@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magali Bakery · Pastelería artesanal | Pedidos por WhatsApp</title>
+<meta name="description" content="Magali Bakery: pastelería artesanal hecha con cariño. Armá tu pedido de brownies, cookies, cheesecake, cupcakes, alfajores y tortas personalizadas y envialo por WhatsApp.">
+<meta name="theme-color" content="#c9a09a">
+<link rel="canonical" href="https://TU-DOMINIO.com/">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<!-- Vista previa al compartir (WhatsApp, Instagram, Facebook) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:site_name" content="Magali Bakery">
+<meta property="og:title" content="Magali Bakery · Pastelería artesanal">
+<meta property="og:description" content="Elegí lo que se te antoja y pedilo por WhatsApp. Hecho a mano, con cariño. 🧁">
+<meta property="og:url" content="https://TU-DOMINIO.com/">
+<meta property="og:image" content="https://TU-DOMINIO.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1200">
+<meta property="og:image:alt" content="Logo de Magali Bakery: un gatito con gorro de chef">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Magali Bakery · Pastelería artesanal">
+<meta name="twitter:description" content="Elegí lo que se te antoja y pedilo por WhatsApp.">
+<meta name="twitter:image" content="https://TU-DOMINIO.com/og-image.jpg">
+<!-- Datos para Google -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Bakery","name":"Magali Bakery","description":"Pastelería artesanal. Pedidos por WhatsApp.","url":"https://TU-DOMINIO.com/","image":"https://TU-DOMINIO.com/og-image.jpg","telephone":"+5491176520430","sameAs":["https://www.instagram.com/magalibakery/"]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rose:#c9a09a; --rose-dk:#a8716b; --rose-lt:#f2d9d5;
+  --cream:#fff8f4; --ink:#5b3a36;
+  --serif:'Gloock',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
+  --catw:clamp(84px,17vw,130px);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* Hero: calcado del logo */
+.hero{background:var(--rose);color:var(--cream);min-height:100svh;display:grid;place-content:center;text-align:center;padding:2rem 1rem 3rem}
+.lockup{position:relative;display:inline-block;font-size:clamp(4.2rem,18vw,9.5rem);line-height:1;margin-top:calc(var(--catw)*.85)}
+.lockup h1{font:400 1em/1 var(--serif);letter-spacing:.015em;word-spacing:normal}
+#slot{position:absolute;left:50%;top:.4em;width:var(--catw);aspect-ratio:212/176;transform:translate(-50%,-100%);pointer-events:none}
+.sub{font:300 clamp(1.1rem,3.6vw,1.7rem)/1 var(--sans);letter-spacing:.7em;padding-left:.7em;margin:1rem 0 2.2rem}
+.lead{max-width:34ch;margin:0 auto 2rem;font-size:1.15rem}
+.btn{display:inline-block;font:500 1rem var(--sans);text-decoration:none;border:0;cursor:pointer;
+  background:var(--cream);color:var(--ink);padding:.85rem 1.6rem;border-radius:999px;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px);background:#fff}
+.btn.wa{background:var(--ink);color:var(--cream)}
+.btn.wa:hover{background:#3f2724}
+
+/* Secciones */
+section{padding:5rem 1.25rem;max-width:1050px;margin:0 auto}
+h2{font:400 clamp(2rem,6vw,3.2rem)/1.1 var(--serif);margin-bottom:.7rem;letter-spacing:.01em}
+.intro{max-width:52ch;margin-bottom:2.5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.6rem}
+.card{background:#fff;border-radius:28px 28px 18px 18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 30px -18px var(--rose-dk)}
+.card .ph{aspect-ratio:1;background:var(--rose-lt);display:grid;place-content:center;font-size:4rem;overflow:hidden}
+.card .ph img{width:100%;height:100%;object-fit:cover}
+.card .body{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.35rem;flex:1}
+.card h3{font:400 1.35rem/1.2 var(--serif)}
+.card p{font-size:.95rem;flex:1}
+.price{font-weight:500}
+.card .btn{margin-top:.6rem;text-align:center;font-size:.95rem}
+.about{background:var(--rose-lt);max-width:none}
+.about>div{max-width:1050px;margin:0 auto}
+.about p{max-width:56ch}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:2rem}
+.how div{border-left:3px solid var(--rose-dk);padding-left:1rem}
+footer{background:var(--rose);color:var(--cream);text-align:center;padding:3.5rem 1rem 8rem}
+footer p{margin-bottom:.4rem}
+footer .btn{margin-top:1rem}
+
+/* Utilidades, redes, botones flotantes y carrito */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.btn svg,.social svg{width:1.25em;height:1.25em;vertical-align:-.2em}
+.social{margin-top:1.4rem}
+.social a{display:inline-flex;gap:.5rem;align-items:center;color:var(--cream);text-underline-offset:4px}
+.btn.ghost{background:transparent;color:var(--cream);box-shadow:inset 0 0 0 2px var(--cream)}
+.btn.ghost:hover{background:rgba(255,248,244,.18)}
+footer .row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+footer .row .btn{margin:0}
+.fabs{position:fixed;right:16px;bottom:20px;z-index:60;display:flex;flex-direction:column;gap:12px}
+@media (max-width:1359px){.fabs{bottom:calc(var(--catw)*.83 + 14px)}}
+.fab{position:relative;width:56px;height:56px;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;
+  color:#fff;box-shadow:0 8px 20px -6px rgba(91,58,54,.6);transition:transform .2s}
+.fab:hover{transform:scale(1.07)}
+.fab svg{width:28px;height:28px}
+#waFab{background:#25d366}
+#cartFab{background:var(--ink)}
+#cartCount{position:absolute;top:-4px;right:-4px;min-width:22px;height:22px;border-radius:11px;background:#e58d95;
+  color:#fff;font:500 .8rem/22px var(--sans);text-align:center;display:none}
+#cartFab.has #cartCount{display:block}
+#cartFab.pop{animation:pop .4s}
+@keyframes pop{40%{transform:scale(1.25)}}
+#overlay{position:fixed;inset:0;background:rgba(91,58,54,.45);z-index:70;opacity:0;visibility:hidden;transition:.25s}
+#overlay.open{opacity:1;visibility:visible}
+#drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--cream);z-index:80;display:flex;
+  flex-direction:column;transform:translateX(105%);visibility:hidden;transition:transform .3s,visibility .3s;
+  box-shadow:-10px 0 30px -12px rgba(91,58,54,.5)}
+#drawer.open{transform:none;visibility:visible}
+.dhead{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1.2rem;border-bottom:1px solid var(--rose-lt)}
+.dhead h2{font-size:1.6rem;margin:0}
+#closeCart{background:none;border:0;font-size:1.4rem;cursor:pointer;color:var(--ink);width:44px;height:44px}
+.dbody{flex:1;overflow:auto;padding:1rem 1.2rem}
+.line{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--rose-lt)}
+.line small{color:var(--rose-dk)}
+.qty{display:flex;align-items:center;gap:.6rem}
+.qty button{width:36px;height:36px;border-radius:50%;border:2px solid var(--rose);background:#fff;color:var(--ink);font-size:1.1rem;cursor:pointer}
+.empty{padding:1.5rem 0}
+.dform{display:grid;gap:.7rem;margin-top:1.2rem}
+.dform label{display:grid;gap:.25rem;font-size:.9rem}
+.dform input,.dform select,.dform textarea{font:inherit;padding:.6rem .7rem;border:2px solid var(--rose-lt);border-radius:12px;background:#fff;color:var(--ink)}
+.dform input:focus,.dform select:focus,.dform textarea:focus{border-color:var(--rose-dk);outline:none}
+.dfoot{padding:1rem 1.2rem;border-top:1px solid var(--rose-lt);display:grid;gap:.6rem}
+#cartTotal{font-weight:500;font-size:1.1rem}
+#sendOrder{display:flex;gap:.5rem;justify-content:center;align-items:center}
+#sendOrder.off{opacity:.45;pointer-events:none}
+#clearCart{background:none;border:0;color:var(--rose-dk);text-decoration:underline;cursor:pointer;font:inherit;justify-self:center}
+@media (max-width:600px){#drawer{top:auto;bottom:0;height:auto;max-height:92svh;width:100%;border-radius:24px 24px 0 0;transform:translateY(105%)}#drawer.open{transform:none}}
+
+/* Mascota Simba: el gatito del logo */
+#cat{position:fixed;left:0;top:0;width:var(--catw);aspect-ratio:212/176;z-index:50;pointer-events:none;will-change:transform}
+#tilt{width:100%;height:100%}
+#tilt{position:relative}
+#cat svg{position:relative;display:block;width:100%;height:100%;overflow:visible}
+#cat svg{filter:drop-shadow(0 0 1px #8f5a54) drop-shadow(0 5px 6px rgba(91,58,54,.25))}
+#cat.home svg{filter:none}
+#cat.walk #tilt{animation:bob .4s ease-in-out infinite}
+#cat.walk .pawL{animation:step .4s ease-in-out infinite}
+#cat.walk .pawR{animation:step .4s ease-in-out .2s infinite}
+.pawL,.pawR{transform-box:fill-box}
+.blink{transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}
+@keyframes bob{50%{transform:translateY(-4px)}}
+@keyframes step{50%{transform:translateY(-5px)}}
+@keyframes blink{96%,100%{opacity:1}98%{opacity:.1}}
+#bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%) scale(.8);opacity:0;white-space:nowrap;
+  background:#fff;color:var(--ink);font-size:.85rem;padding:.4rem .8rem;border-radius:14px;
+  box-shadow:0 6px 18px -8px var(--ink);transition:.25s;margin-bottom:4px}
+#bubble.on{opacity:1;transform:translateX(-50%) scale(1)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- Simba: el gatito pastelero del logo (cabeza, gorro y patitas) -->
+<div id="cat" class="home" aria-hidden="true">
+  <div id="bubble"></div>
+  <div id="tilt">
+  <svg viewBox="-6 0 212 176" fill="#c9a09a" stroke="#fff8f4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- gorro: banda ancha y nube de tres lóbulos -->
+    <path d="M75 80 L75 54 Q57 54 57 40 Q57 24 75 27 Q82 9 106 12 Q127 9 134 26 Q155 25 155 41 Q155 54 136 54 L136 80"/>
+    <!-- cabeza: relleno + contorno abierto (sin línea de mentón, como en el logo) -->
+    <path stroke="none" d="M26 160 Q16 112 39 63 Q42 58 48 62 L68 79 Q100 72 132 79 L152 62 Q158 58 161 63 Q184 112 174 160 Q160 172 100 172 Q40 172 26 160 Z"/>
+    <path fill="none" d="M26 160 Q16 112 39 63 Q42 58 48 62 L68 79 Q100 72 132 79 L152 62 Q158 58 161 63 Q184 112 174 160"/>
+    <!-- ojitos felices con pestañas -->
+    <g class="blink" fill="none"><path d="M58 133 q9.5 -10 19 0 M123 133 q9.5 -10 19 0"/>
+    <path d="M59 129 l-3.5 -2.5 M63 125.5 l-2 -4 M141 129 l3.5 -2.5 M137 125.5 l2 -4" stroke-width="2"/></g>
+    <!-- nariz corazón -->
+    <path d="M100 147 l-6.5 -6.5 a3.6 3.6 0 0 1 6.5 -4.6 a3.6 3.6 0 0 1 6.5 4.6 z" fill="#fff8f4" stroke-width="1.5"/>
+    <!-- bigotes -->
+    <path d="M28 126 l-33 -6 M27 137 l-34 2 M28 148 l-30 10 M172 126 l33 -6 M173 137 l34 2 M172 148 l30 10" fill="none" stroke-width="2"/>
+    <!-- patitas con deditos -->
+    <g class="pawL"><path d="M20 176 V172 a17 14 0 0 1 34 0 V176 Z"/><path d="M31 165 v6 M37 163 v8 M43 165 v6" fill="none" stroke-width="2"/></g>
+    <g class="pawR"><path d="M141 176 V172 a17 14 0 0 1 34 0 V176 Z"/><path d="M152 165 v6 M158 163 v8 M164 165 v6" fill="none" stroke-width="2"/></g>
+  </svg>
+  </div>
+</div>
+
+<header class="hero" data-say="¡Hola! Soy Simba 🐾">
+  <div>
+    <div class="lockup">
+      <h1>magali<span class="sr"> bakery, pastelería artesanal</span></h1>
+      <div id="slot"></div>
+    </div>
+    <p class="sub">bakery</p>
+    <p class="lead">Pastelería artesanal hecha con cariño. Elegí lo que se te antoja y pedilo por WhatsApp.</p>
+    <a class="btn" href="#productos">Ver productos</a>
+    <p class="social"><a href="https://www.instagram.com/magalibakery/" target="_blank" rel="noopener me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor"/></svg> @magalibakery</a></p>
+  </div>
+</header>
+
+<section id="productos" data-say="¡Mirá qué rico! 😋">
+  <h2>Lo que estamos horneando</h2>
+  <p class="intro">Agregá lo que quieras a tu pedido y mandalo todo junto por WhatsApp.</p>
+  <div class="grid" id="grid"></div>
+  <noscript><p>Para ver el catálogo activá JavaScript o escribinos directo por WhatsApp al 11 7652-0430.</p></noscript>
+</section>
+
+<section class="about" data-say="Así se pide 📲">
+  <div>
+    <h2>Pedir es facilísimo</h2>
+    <p>Todo se hace a mano y por encargo, así que llega fresco. Escribinos con tiempo y coordinamos entrega o retiro.</p>
+    <div class="how">
+      <div><strong>Elegí</strong><br>Sumá lo que quieras a tu pedido, todo junto.</div>
+      <div><strong>Enviá tu pedido</strong><br>Se abre WhatsApp con todo el detalle armado.</div>
+      <div><strong>Coordinamos</strong><br>Confirmamos fecha, cantidad y forma de entrega.</div>
+    </div>
+  </div>
+</section>
+
+<footer data-say="¡Hasta pronto! 💕">
+  <h2>¿Algo especial en mente?</h2>
+  <p>Tortas personalizadas, mesas dulces y encargos para eventos.</p>
+  <div class="row">
+    <a class="btn wa" id="waGeneral" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c-.3 2.6 3.9 6.6 6.5 6.5l1-1.6-2.1-1-.9.8c-.9-.4-1.9-1.4-2.3-2.3l.8-.9-1-2.1z" fill="currentColor" stroke="none"/></svg> Escribinos por WhatsApp</a>
+    <a class="btn ghost" href="https://www.instagram.com/magalibakery/" target="_blank" rel="noopener me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor"/></svg> Instagram</a>
+  </div>
+  <p style="margin-top:2rem;font-size:.9rem">© <span id="yr"></span> Magali Bakery</p>
+</footer>
+
+<!-- Botones flotantes -->
+<div class="fabs">
+  <a class="fab" id="waFab" href="#" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c-.3 2.6 3.9 6.6 6.5 6.5l1-1.6-2.1-1-.9.8c-.9-.4-1.9-1.4-2.3-2.3l.8-.9-1-2.1z" fill="currentColor" stroke="none"/></svg></a>
+  <button class="fab" id="cartFab" aria-label="Ver mi pedido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="cartCount">0</span></button>
+</div>
+
+<!-- Carrito de pedido -->
+<div id="overlay"></div>
+<aside id="drawer" role="dialog" aria-modal="true" aria-label="Tu pedido">
+  <div class="dhead"><h2>Tu pedido</h2><button id="closeCart" aria-label="Cerrar">✕</button></div>
+  <div class="dbody">
+    <div id="cartItems"></div>
+    <div class="dform">
+      <label>Tu nombre <input id="fName" autocomplete="name"></label>
+      <label>Retiro o envío <select id="fMode"><option>Retiro</option><option>Envío</option></select></label>
+      <label>Fecha en que lo necesitás <input type="date" id="fDate"></label>
+      <label>Aclaraciones <textarea id="fNotes" rows="2" placeholder="Sabores, dedicatoria, alergias…"></textarea></label>
+    </div>
+  </div>
+  <div class="dfoot">
+    <div id="cartTotal"></div>
+    <a class="btn wa off" id="sendOrder" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c-.3 2.6 3.9 6.6 6.5 6.5l1-1.6-2.1-1-.9.8c-.9-.4-1.9-1.4-2.3-2.3l.8-.9-1-2.1z" fill="currentColor" stroke="none"/></svg> Enviar pedido por WhatsApp</a>
+    <button id="clearCart">Vaciar pedido</button>
+  </div>
+</aside>
+
+<script>
+/* ====== CONFIGURACIÓN ====== */
+const WHATSAPP = "5491176520430"; // 54 9 + 11 7652-0430
+const PRODUCTS = [
+  // price: precio en pesos, solo el número (ej: 4500). Con 0 se muestra "Consultar precio".
+  // img: ruta de la foto real (ej: "img/brownie.jpg").
+  { name:"Brownies",              desc:"Húmedos, intensos y con nueces.",          price:0, emoji:"🍫", img:"" },
+  { name:"Cookies",               desc:"Crocantes por fuera, blandas por dentro.", price:0, emoji:"🍪", img:"" },
+  { name:"Cheesecake",            desc:"Cremoso, con salsa de frutos rojos.",      price:0, emoji:"🍰", img:"" },
+  { name:"Cupcakes",              desc:"Decorados a pedido, caja de 6.",           price:0, emoji:"🧁", img:"" },
+  { name:"Alfajores",             desc:"Rellenos de dulce de leche casero.",       price:0, emoji:"🥮", img:"" },
+  { name:"Tortas personalizadas", desc:"Para cumpleaños y eventos. Consultá.",     price:0, emoji:"🎂", img:"" }
+];
+/* =========================== */
+
+const $ = id => document.getElementById(id);
+const wa = t => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`;
+const money = n => '$' + n.toLocaleString('es-AR');
+const priceTxt = p => p.price > 0 ? money(p.price) : 'Consultar precio';
+
+$('grid').innerHTML = PRODUCTS.map((p, i) => `
+  <article class="card">
+    <div class="ph">${p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy">` : p.emoji}</div>
+    <div class="body">
+      <h3>${p.name}</h3><p>${p.desc}</p><span class="price">${priceTxt(p)}</span>
+      <button class="btn wa add" data-id="${i}">Agregar al pedido</button>
+    </div>
+  </article>`).join('');
+const generalMsg = wa('¡Hola Magali Bakery! 🧁 Quiero hacer una consulta.');
+$('waGeneral').href = generalMsg; $('waFab').href = generalMsg;
+$('yr').textContent = new Date().getFullYear();
+
+/* ====== Carrito de pedido ====== */
+let cart = {};
+try { cart = JSON.parse(localStorage.getItem('mb_cart') || '{}'); } catch (e) {}
+Object.keys(cart).forEach(k => { if (!PRODUCTS[k] || !(cart[k] > 0)) delete cart[k]; });
+const save = () => { try { localStorage.setItem('mb_cart', JSON.stringify(cart)); } catch (e) {} };
+const ids = () => Object.keys(cart);
+const total = () => ids().reduce((a, k) => a + PRODUCTS[k].price * cart[k], 0);
+
+function orderText(){
+  const lines = ids().map(k => `• ${cart[k]} x ${PRODUCTS[k].name}` + (PRODUCTS[k].price > 0 ? ` — ${money(PRODUCTS[k].price * cart[k])}` : ''));
+  let t = `¡Hola Magali Bakery! 🧁 Quiero hacer este pedido:\n${lines.join('\n')}`;
+  if (total() > 0) t += `\n\nTotal estimado: ${money(total())}` + (ids().some(k => !(PRODUCTS[k].price > 0)) ? ' (+ ítems a confirmar)' : '');
+  const name = $('fName').value.trim(), date = $('fDate').value, notes = $('fNotes').value.trim();
+  t += `\n\n${$('fMode').value}` + (date ? ` para el ${date.split('-').reverse().join('/')}` : '');
+  if (name) t += `\nNombre: ${name}`;
+  if (notes) t += `\nAclaraciones: ${notes}`;
+  return t;
+}
+function renderCart(){
+  const n = ids().reduce((a, k) => a + cart[k], 0);
+  $('cartCount').textContent = n;
+  $('cartFab').classList.toggle('has', n > 0);
+  $('cartItems').innerHTML = n ? ids().map(k => `
+    <div class="line"><div><strong>${PRODUCTS[k].name}</strong><br><small>${priceTxt(PRODUCTS[k])}</small></div>
+      <div class="qty"><button data-act="dec" data-id="${k}" aria-label="Quitar uno">−</button><span>${cart[k]}</span>
+      <button data-act="inc" data-id="${k}" aria-label="Agregar uno">+</button></div></div>`).join('')
+    : '<p class="empty">Todavía no agregaste nada. ¡Elegí algo rico del catálogo! 🧁</p>';
+  $('cartTotal').textContent = total() > 0 ? `Total estimado: ${money(total())}` : '';
+  $('sendOrder').href = n ? wa(orderText()) : '#';
+  $('sendOrder').classList.toggle('off', !n);
+  $('clearCart').hidden = !n;
+}
+const openCart = () => { $('drawer').classList.add('open'); $('overlay').classList.add('open'); $('closeCart').focus(); };
+const closeCart = () => { $('drawer').classList.remove('open'); $('overlay').classList.remove('open'); };
+
+$('grid').addEventListener('click', e => {
+  const b = e.target.closest('.add'); if (!b) return;
+  cart[b.dataset.id] = (cart[b.dataset.id] || 0) + 1; save(); renderCart();
+  b.textContent = 'Agregado ✓'; setTimeout(() => b.textContent = 'Agregar al pedido', 1000);
+  const f = $('cartFab'); f.classList.remove('pop'); void f.offsetWidth; f.classList.add('pop');
+  say('¡Anotado! 🧁');
+});
+$('cartItems').addEventListener('click', e => {
+  const b = e.target.closest('button[data-act]'); if (!b) return;
+  cart[b.dataset.id] += b.dataset.act === 'inc' ? 1 : -1;
+  if (cart[b.dataset.id] <= 0) delete cart[b.dataset.id];
+  save(); renderCart();
+});
+$('cartFab').onclick = openCart; $('closeCart').onclick = closeCart; $('overlay').onclick = closeCart;
+addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
+$('clearCart').onclick = () => { cart = {}; save(); renderCart(); };
+['fName', 'fMode', 'fDate', 'fNotes'].forEach(id => $(id).addEventListener('input', renderCart));
+$('sendOrder').addEventListener('click', () => say('¡Gracias! Te espero en WhatsApp 💕'));
+const d = new Date(); $('fDate').min = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+renderCart();
+
+/* ====== Simba: nace en el logo y te sigue al bajar ====== */
+const cat = document.getElementById('cat'), tilt = document.getElementById('tilt'),
+      bubble = document.getElementById('bubble'), slot = document.getElementById('slot');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let x = 0, y = 0, tx = 0, ty = 0, idle;
+
+function calc(){
+  const cw = cat.offsetWidth, ch = cat.offsetHeight, vw = innerWidth, vh = innerHeight;
+  const max = document.documentElement.scrollHeight - vh, p = max > 0 ? scrollY / max : 0;
+  const gutter = (vw - 1050) / 2;
+  let px, py;
+  if (gutter >= cw + 24) {            // pantalla ancha: baja por el margen derecho sin tapar texto
+    px = vw - gutter + (gutter - cw) / 2 + Math.sin(p * Math.PI * 8) * (gutter - cw) * .4;
+    py = 90 + p * (vh - ch - 260);
+  } else {                            // celular: asoma desde el borde de abajo, como en el logo
+    px = 8 + (vw - cw - 16) * (.5 + .5 * Math.cos(p * Math.PI * 5));
+    py = vh - ch + 6;
+  }
+  const s = slot.getBoundingClientRect();
+  const t = Math.min(1, Math.max(0, scrollY / (vh * .4))), e = t * t * (3 - 2 * t);
+  tx = s.left * (1 - e) + px * e;
+  ty = s.top * (1 - e) + py * e;
+  cat.classList.toggle('home', t === 0);
+  if (t === 0 || reduce) { x = tx; y = ty; draw(0); }
+}
+function draw(dx){
+  cat.style.transform = `translate(${x}px,${y}px)`;
+  tilt.style.rotate = `${Math.max(-8, Math.min(8, dx * .06))}deg`;
+}
+function loop(){
+  const dx = tx - x, dy = ty - y;
+  x += dx * .08; y += dy * .08;
+  draw(dx);
+  cat.classList.toggle('walk', Math.abs(dx) + Math.abs(dy) > 5);
+  requestAnimationFrame(loop);
+}
+addEventListener('scroll', calc, {passive:true});
+addEventListener('resize', calc);
+addEventListener('load', calc);
+document.fonts && document.fonts.ready.then(calc);
+calc(); if (!reduce) loop();
+
+function say(t){ bubble.textContent = t; bubble.classList.add('on'); clearTimeout(idle); idle = setTimeout(() => bubble.classList.remove('on'), 3200); }
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && e.target.dataset.say) say(e.target.dataset.say); }), {threshold:.45});
+document.querySelectorAll('[data-say]').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
