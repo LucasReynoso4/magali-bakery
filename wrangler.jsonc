@@ -1,0 +1,8 @@
+// Configuración de Cloudflare Workers: publica los archivos estáticos de public/.
+{
+  "name": "magali-bakery",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./public"
+  }
+}
