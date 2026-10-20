@@ -132,6 +132,7 @@ footer .row .btn{margin:0}
 /* Mascota Simba: el gatito del logo */
 #cat{position:fixed;left:0;top:0;width:var(--catw);aspect-ratio:212/176;z-index:50;pointer-events:none;will-change:transform}
 #tilt{width:100%;height:100%}
+#fall{position:absolute;inset:0}
 #tilt{position:relative}
 #cat svg{position:relative;display:block;width:100%;height:100%;overflow:visible}
 #cat svg{filter:drop-shadow(0 0 1px #8f5a54) drop-shadow(0 5px 6px rgba(91,58,54,.25))}
@@ -196,6 +197,7 @@ footer .row .btn{margin:0}
 
 <!-- Simba: el gatito pastelero del logo (cabeza, gorro y patitas) -->
 <div id="cat" class="home" aria-hidden="true">
+  <div id="fall">
   <div id="bubble"></div>
   <div id="tilt"><div id="hop">
   <svg viewBox="-6 0 212 176" fill="#c9a09a" stroke="#fff8f4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -219,6 +221,7 @@ footer .row .btn{margin:0}
     <g class="pawR"><path d="M141 176 V172 a17 14 0 0 1 34 0 V176 Z"/><path d="M152 165 v6 M158 163 v8 M164 165 v6" fill="none" stroke-width="2"/></g>
   </svg>
   </div></div>
+  </div>
 </div>
 
 <header class="hero" data-say="¡Hola! Soy Simba 🐾">
@@ -388,30 +391,63 @@ renderCart();
 
 /* ====== Simba: nace en el logo y te sigue al bajar ====== */
 const cat = document.getElementById('cat'), tilt = document.getElementById('tilt'), hop = document.getElementById('hop'),
-      bubble = document.getElementById('bubble'), slot = document.getElementById('slot');
+      bubble = document.getElementById('bubble'), slot = document.getElementById('slot'), fall = document.getElementById('fall');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const easeOut = 'cubic-bezier(.16,1,.3,1)';
-let x = 0, y = 0, tx = 0, ty = 0, idle, running = false;
+let x = 0, y = 0, tx = 0, ty = 0, idle, running = false, t = 0, glued = true, stop;
+// en el celu la bajada desde el logo la anima el navegador atada al scroll (ScrollTimeline):
+// así va al mismo ritmo que la página, sin el retraso de JavaScript que en iOS se ve trabado
+const canFall = 'ScrollTimeline' in window && !reduce;
+let falling = null, fallKey = '';
 
 function calc(){
   const cw = cat.offsetWidth, ch = cat.offsetHeight, vw = innerWidth, vh = innerHeight;
   const max = document.documentElement.scrollHeight - vh, p = max > 0 ? scrollY / max : 0;
-  const gutter = (vw - 1050) / 2;
+  const range = vh * .4, gutter = (vw - 1050) / 2, wide = gutter >= cw + 24;
   let px, py;
-  if (gutter >= cw + 24) {            // pantalla ancha: baja por el margen derecho sin tapar texto
+  if (wide) {                         // pantalla ancha: baja por el margen derecho sin tapar texto
     px = vw - gutter + (gutter - cw) / 2 + Math.sin(p * Math.PI * 8) * (gutter - cw) * .4;
     py = 90 + p * (vh - ch - 260);
-  } else {                            // celular: asoma desde el borde de abajo, como en el logo
-    px = 8 + (vw - cw - 16) * (.5 + .5 * Math.cos(p * Math.PI * 5));
+  } else {                            // celular: baja del logo y camina por el borde de abajo
+    px = 8 + (vw - cw - 16) * (.5 + .5 * Math.cos(Math.max(p, range / max) * Math.PI * 5));
     py = vh - ch + 6;
   }
   const s = slot.getBoundingClientRect();
-  const t = Math.min(1, Math.max(0, scrollY / (vh * .4))), e = t * t * (3 - 2 * t);
-  tx = s.left * (1 - e) + px * e;
-  ty = s.top * (1 - e) + py * e;
+  t = Math.min(1, Math.max(0, scrollY / range));
+  const e = t * t * (3 - 2 * t);
+  if (!wide && canFall) { fallPath(s, px, py, range, max); tx = px; ty = py; }
+  else {
+    if (falling) { falling.cancel(); falling = null; fallKey = ''; }
+    tx = s.left * (1 - e) + px * e;
+    ty = s.top * (1 - e) + py * e;
+  }
   cat.classList.toggle('home', t === 0);
-  if (t === 0 || reduce) { x = tx; y = ty; draw(0); }
+  if (t === 0) glued = true;
+  else if (t === 1) glued = false;
+  // al salir del logo va pegado al scroll: si lo persigue con retraso se ve trabado
+  if (glued || reduce) { const dx = tx - x; x = tx; y = ty; draw(t ? dx : 0); if (t) stroll(); }
   else wake();
+}
+// el camino del logo al borde: Simba queda quieto abajo y #fall lo desplaza hasta el logo,
+// desplazamiento que se achica a medida que bajás
+function fallPath(s, px, py, range, max){
+  const key = [innerWidth, py, max].join();
+  if (key === fallKey) return;
+  fallKey = key;
+  const top = s.top + scrollY, frames = [];
+  for (let i = 0; i <= 12; i++) {
+    const k = i / 12, e = k * k * (3 - 2 * k), at = range * k;
+    frames.push({offset: Math.min(1, at / max), transform: `translate(${(s.left - px) * (1 - e)}px,${(top - at - py) * (1 - e)}px)`});
+  }
+  if (frames[12].offset < 1) frames.push({offset: 1, transform: 'none'});
+  if (falling) falling.cancel();
+  falling = fall.animate(frames, {timeline: new ScrollTimeline({source: document.documentElement}), fill: 'both'});
+}
+// mientras va pegado, camina solo mientras haya scroll
+function stroll(){
+  cat.classList.add('walk');
+  clearTimeout(stop);
+  stop = setTimeout(() => { cat.classList.remove('walk'); land(); }, 160);
 }
 function draw(dx){
   cat.style.transform = `translate(${x}px,${y}px)`;
@@ -421,7 +457,7 @@ function draw(dx){
 // el globito nunca se sale de la pantalla
 function placeBubble(){
   if (!bubble.classList.contains('on')) return;
-  const half = bubble.offsetWidth / 2, c = x + cat.offsetWidth / 2;
+  const r = fall.getBoundingClientRect(), half = bubble.offsetWidth / 2, c = r.left + r.width / 2;
   bubble.style.marginLeft = `${Math.min(innerWidth - 8 - half, Math.max(8 + half, c)) - c}px`;
 }
 // el bucle solo corre mientras Simba camina: quieto no gasta batería
@@ -429,7 +465,7 @@ function wake(){ if (!running && !reduce) { running = true; requestAnimationFram
 function loop(){
   const dx = tx - x, dy = ty - y;
   if (Math.abs(dx) + Math.abs(dy) < .4) {
-    x = tx; y = ty; draw(0); running = false;
+    x = tx; y = ty; draw(0); running = false; glued = t < 1;
     if (cat.classList.contains('walk')) { cat.classList.remove('walk'); land(); }
     return;
   }
@@ -460,7 +496,7 @@ function jump(){
 }
 function float(cls, txt, dx){
   if (reduce) return;
-  const el = document.createElement('span'); el.className = cls; el.textContent = txt; cat.appendChild(el);
+  const el = document.createElement('span'); el.className = cls; el.textContent = txt; fall.appendChild(el);
   const a = el.animate([
     {transform:'translate(-50%,0) scale(.4)', opacity:0},
     {transform:`translate(calc(-50% + ${dx * .4}px),-18px) scale(1)`, opacity:1, offset:.25},
