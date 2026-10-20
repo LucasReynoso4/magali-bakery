@@ -32,7 +32,7 @@
 <style>
 :root{
   --rose:#c9a09a; --rose-dk:#a8716b; --rose-lt:#f2d9d5;
-  --cream:#fff8f4; --ink:#5b3a36;
+  --cream:#fff8f4; --ink:#5b3a36; --ink-dk:#4a2c28; /* ink-dk sobre el rosa del logo: 5.3:1 */
   --serif:'Gloock',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
   --catw:clamp(84px,17vw,130px);
 }
@@ -47,7 +47,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-heigh
 .lockup h1{font:400 1em/1 var(--serif);letter-spacing:.015em;word-spacing:normal}
 #slot{position:absolute;left:50%;top:.4em;width:var(--catw);aspect-ratio:212/176;transform:translate(-50%,-100%);pointer-events:none}
 .sub{font:300 clamp(1.1rem,3.6vw,1.7rem)/1 var(--sans);letter-spacing:.7em;padding-left:.7em;margin:1rem 0 2.2rem}
-.lead{max-width:34ch;margin:0 auto 2rem;font-size:1.15rem}
+.lead{max-width:34ch;margin:0 auto 2rem;font-size:1.15rem;color:var(--ink-dk)}
 .btn{display:inline-block;font:500 1rem var(--sans);text-decoration:none;border:0;cursor:pointer;
   background:var(--cream);color:var(--ink);padding:.85rem 1.6rem;border-radius:999px;transition:transform .2s,background .2s}
 .btn:hover{transform:translateY(-2px);background:#fff}
@@ -55,11 +55,11 @@ body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-heigh
 .btn.wa:hover{background:#3f2724}
 
 /* Secciones */
-section{padding:5rem 1.25rem;max-width:1050px;margin:0 auto}
+section{padding:clamp(4.5rem,11vw,8.5rem) 1.25rem;max-width:1050px;margin:0 auto}
 h2{font:400 clamp(2rem,6vw,3.2rem)/1.1 var(--serif);margin-bottom:.7rem;letter-spacing:.01em}
 .intro{max-width:52ch;margin-bottom:2.5rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.6rem}
-.card{background:#fff;border-radius:28px 28px 18px 18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 30px -18px var(--rose-dk)}
+.card{background:#fff;border-radius:28px 28px 18px 18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 14px 34px -28px var(--rose-dk)}
 .card .ph{aspect-ratio:1;background:var(--rose-lt);display:grid;place-content:center;font-size:4rem;overflow:hidden}
 .card .ph img{width:100%;height:100%;object-fit:cover}
 .card .body{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.35rem;flex:1}
@@ -72,7 +72,8 @@ h2{font:400 clamp(2rem,6vw,3.2rem)/1.1 var(--serif);margin-bottom:.7rem;letter-s
 .about p{max-width:56ch}
 .how{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:2rem}
 .how div{border-left:3px solid var(--rose-dk);padding-left:1rem}
-footer{background:var(--rose);color:var(--cream);text-align:center;padding:3.5rem 1rem 8rem}
+footer{background:var(--rose);color:var(--ink-dk);text-align:center;padding:clamp(4.5rem,10vw,7rem) 1rem 8rem;overflow:hidden}
+.echo{font:400 clamp(5rem,26vw,17rem)/.8 var(--serif);color:var(--cream);letter-spacing:.015em;margin-top:clamp(3rem,8vw,5rem);user-select:none}
 footer p{margin-bottom:.4rem}
 footer .btn{margin-top:1rem}
 
@@ -80,9 +81,9 @@ footer .btn{margin-top:1rem}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .btn svg,.social svg{width:1.25em;height:1.25em;vertical-align:-.2em}
 .social{margin-top:1.4rem}
-.social a{display:inline-flex;gap:.5rem;align-items:center;color:var(--cream);text-underline-offset:4px}
-.btn.ghost{background:transparent;color:var(--cream);box-shadow:inset 0 0 0 2px var(--cream)}
-.btn.ghost:hover{background:rgba(255,248,244,.18)}
+.social a{display:inline-flex;gap:.5rem;align-items:center;color:var(--ink-dk);text-underline-offset:4px}
+.btn.ghost{background:transparent;color:var(--ink-dk);box-shadow:inset 0 0 0 2px var(--ink-dk)}
+.btn.ghost:hover{background:rgba(255,248,244,.35)}
 footer .row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
 footer .row .btn{margin:0}
 .fabs{position:fixed;right:16px;bottom:20px;z-index:60;display:flex;flex-direction:column;gap:12px}
@@ -106,7 +107,9 @@ footer .row .btn{margin:0}
 #drawer.open{transform:none;visibility:visible}
 .dhead{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1.2rem;border-bottom:1px solid var(--rose-lt)}
 .dhead h2{font-size:1.6rem;margin:0}
-#closeCart{background:none;border:0;font-size:1.4rem;cursor:pointer;color:var(--ink);width:44px;height:44px}
+#closeCart{background:none;border:0;cursor:pointer;color:var(--ink);width:44px;height:44px;display:grid;place-items:center;border-radius:50%}
+#closeCart:hover{background:var(--rose-lt)}
+#closeCart svg{width:22px;height:22px}
 .dbody{flex:1;overflow:auto;padding:1rem 1.2rem}
 .line{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--rose-lt)}
 .line small{color:var(--rose-dk)}
@@ -131,14 +134,29 @@ footer .row .btn{margin:0}
 #cat svg{position:relative;display:block;width:100%;height:100%;overflow:visible}
 #cat svg{filter:drop-shadow(0 0 1px #8f5a54) drop-shadow(0 5px 6px rgba(91,58,54,.25))}
 #cat.home svg{filter:none}
+#hop{width:100%;height:100%;transform-origin:50% 100%;pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}
 #cat.walk #tilt{animation:bob .4s ease-in-out infinite}
 #cat.walk .pawL{animation:step .4s ease-in-out infinite}
 #cat.walk .pawR{animation:step .4s ease-in-out .2s infinite}
 .pawL,.pawR{transform-box:fill-box}
 .blink{transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}
+/* colita: se mece tranquila, se apura al caminar y cuando está contento */
+.tail{transform-box:fill-box;transform-origin:0% 100%;animation:sway 3.2s ease-in-out infinite}
+#cat.walk .tail{animation-duration:.8s}
+#cat.happy .tail{animation:wag .28s ease-in-out 5}
+#cat.home .tail{opacity:0;animation:none}
+.tail{transition:opacity .4s}
+/* durmiendo: ojitos quietos y zZ */
+#cat.sleep .blink{animation:none}
+#cat.sleep #tilt{animation:breathe 3s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(-4px)}}
 @keyframes step{50%{transform:translateY(-5px)}}
 @keyframes blink{96%,100%{opacity:1}98%{opacity:.1}}
+@keyframes sway{0%,100%{rotate:-6deg}50%{rotate:10deg}}
+@keyframes wag{0%,100%{rotate:-14deg}50%{rotate:18deg}}
+@keyframes breathe{50%{transform:scale(1.025,.975)}}
+.heart,.zz{position:absolute;left:50%;top:10%;pointer-events:none;font-size:1.1rem;line-height:1;color:var(--rose-dk)}
+.zz{font:500 1rem var(--sans);color:var(--rose-dk)}
 #bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%) scale(.8);opacity:0;white-space:nowrap;
   background:#fff;color:var(--ink);font-size:.85rem;padding:.4rem .8rem;border-radius:14px;
   box-shadow:0 6px 18px -8px var(--ink);transition:.25s;margin-bottom:4px}
@@ -151,8 +169,11 @@ footer .row .btn{margin:0}
 <!-- Simba: el gatito pastelero del logo (cabeza, gorro y patitas) -->
 <div id="cat" class="home" aria-hidden="true">
   <div id="bubble"></div>
-  <div id="tilt">
+  <div id="tilt"><div id="hop">
   <svg viewBox="-6 0 212 176" fill="#c9a09a" stroke="#fff8f4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- colita: asoma por detrás de la cabeza -->
+    <g class="tail" fill="none"><path d="M164 160 C196 158 210 132 199 106 Q194 94 205 88" stroke="#fff8f4" stroke-width="16"/>
+    <path d="M164 160 C196 158 210 132 199 106 Q194 94 205 88" stroke="#c9a09a" stroke-width="10"/></g>
     <!-- gorro: banda ancha y nube de tres lóbulos -->
     <path d="M75 80 L75 54 Q57 54 57 40 Q57 24 75 27 Q82 9 106 12 Q127 9 134 26 Q155 25 155 41 Q155 54 136 54 L136 80"/>
     <!-- cabeza: relleno + contorno abierto (sin línea de mentón, como en el logo) -->
@@ -169,7 +190,7 @@ footer .row .btn{margin:0}
     <g class="pawL"><path d="M20 176 V172 a17 14 0 0 1 34 0 V176 Z"/><path d="M31 165 v6 M37 163 v8 M43 165 v6" fill="none" stroke-width="2"/></g>
     <g class="pawR"><path d="M141 176 V172 a17 14 0 0 1 34 0 V176 Z"/><path d="M152 165 v6 M158 163 v8 M164 165 v6" fill="none" stroke-width="2"/></g>
   </svg>
-  </div>
+  </div></div>
 </div>
 
 <header class="hero" data-say="¡Hola! Soy Simba 🐾">
@@ -212,6 +233,7 @@ footer .row .btn{margin:0}
     <a class="btn ghost" href="https://www.instagram.com/magalibakery/" target="_blank" rel="noopener me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor"/></svg> Instagram</a>
   </div>
   <p style="margin-top:2rem;font-size:.9rem">© <span id="yr"></span> Magali Bakery</p>
+  <p class="echo" aria-hidden="true">magali</p>
 </footer>
 
 <!-- Botones flotantes -->
@@ -223,7 +245,7 @@ footer .row .btn{margin:0}
 <!-- Carrito de pedido -->
 <div id="overlay"></div>
 <aside id="drawer" role="dialog" aria-modal="true" aria-label="Tu pedido">
-  <div class="dhead"><h2>Tu pedido</h2><button id="closeCart" aria-label="Cerrar">✕</button></div>
+  <div class="dhead"><h2>Tu pedido</h2><button id="closeCart" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="dbody">
     <div id="cartItems"></div>
     <div class="dform">
@@ -312,7 +334,7 @@ $('grid').addEventListener('click', e => {
   cart[b.dataset.id] = (cart[b.dataset.id] || 0) + 1; save(); renderCart();
   b.textContent = 'Agregado ✓'; setTimeout(() => b.textContent = 'Agregar al pedido', 1000);
   const f = $('cartFab'); f.classList.remove('pop'); void f.offsetWidth; f.classList.add('pop');
-  say('¡Anotado! 🧁');
+  say('¡Anotado! 🧁'); happy();
 });
 $('cartItems').addEventListener('click', e => {
   const b = e.target.closest('button[data-act]'); if (!b) return;
@@ -324,15 +346,16 @@ $('cartFab').onclick = openCart; $('closeCart').onclick = closeCart; $('overlay'
 addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
 $('clearCart').onclick = () => { cart = {}; save(); renderCart(); };
 ['fName', 'fMode', 'fDate', 'fNotes'].forEach(id => $(id).addEventListener('input', renderCart));
-$('sendOrder').addEventListener('click', () => say('¡Gracias! Te espero en WhatsApp 💕'));
+$('sendOrder').addEventListener('click', () => { say('¡Gracias! Te espero en WhatsApp 💕'); happy(); });
 const d = new Date(); $('fDate').min = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 renderCart();
 
 /* ====== Simba: nace en el logo y te sigue al bajar ====== */
-const cat = document.getElementById('cat'), tilt = document.getElementById('tilt'),
+const cat = document.getElementById('cat'), tilt = document.getElementById('tilt'), hop = document.getElementById('hop'),
       bubble = document.getElementById('bubble'), slot = document.getElementById('slot');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-let x = 0, y = 0, tx = 0, ty = 0, idle;
+const easeOut = 'cubic-bezier(.16,1,.3,1)';
+let x = 0, y = 0, tx = 0, ty = 0, idle, running = false;
 
 function calc(){
   const cw = cat.offsetWidth, ch = cat.offsetHeight, vw = innerWidth, vh = innerHeight;
@@ -352,25 +375,95 @@ function calc(){
   ty = s.top * (1 - e) + py * e;
   cat.classList.toggle('home', t === 0);
   if (t === 0 || reduce) { x = tx; y = ty; draw(0); }
+  else wake();
 }
 function draw(dx){
   cat.style.transform = `translate(${x}px,${y}px)`;
   tilt.style.rotate = `${Math.max(-8, Math.min(8, dx * .06))}deg`;
+  placeBubble();
 }
+// el globito nunca se sale de la pantalla
+function placeBubble(){
+  if (!bubble.classList.contains('on')) return;
+  const half = bubble.offsetWidth / 2, c = x + cat.offsetWidth / 2;
+  bubble.style.marginLeft = `${Math.min(innerWidth - 8 - half, Math.max(8 + half, c)) - c}px`;
+}
+// el bucle solo corre mientras Simba camina: quieto no gasta batería
+function wake(){ if (!running && !reduce) { running = true; requestAnimationFrame(loop); } }
 function loop(){
   const dx = tx - x, dy = ty - y;
+  if (Math.abs(dx) + Math.abs(dy) < .4) {
+    x = tx; y = ty; draw(0); running = false;
+    if (cat.classList.contains('walk')) { cat.classList.remove('walk'); land(); }
+    return;
+  }
   x += dx * .08; y += dy * .08;
   draw(dx);
   cat.classList.toggle('walk', Math.abs(dx) + Math.abs(dy) > 5);
   requestAnimationFrame(loop);
 }
-addEventListener('scroll', calc, {passive:true});
+addEventListener('scroll', () => { calc(); rouse(); }, {passive:true});
 addEventListener('resize', calc);
 addEventListener('load', calc);
 document.fonts && document.fonts.ready.then(calc);
-calc(); if (!reduce) loop();
+calc();
 
-function say(t){ bubble.textContent = t; bubble.classList.add('on'); clearTimeout(idle); idle = setTimeout(() => bubble.classList.remove('on'), 3200); }
+/* ====== Gestos de Simba ====== */
+const anim = (el, frames, opts) => reduce ? null : el.animate(frames, {easing: easeOut, ...opts});
+// al frenar: se acomoda con un pequeño aplaste
+function land(){ anim(hop, [{transform:'scale(1)'}, {transform:'scale(1.06,.94)'}, {transform:'scale(1)'}], {duration:450}); }
+// salto de alegría: se agacha, salta y cae
+function jump(){
+  anim(hop, [
+    {transform:'translateY(0) scale(1)'},
+    {transform:'translateY(0) scale(1.08,.9)', offset:.15},
+    {transform:'translateY(-26px) scale(.95,1.06)', offset:.45, easing:'cubic-bezier(.33,1,.68,1)'},
+    {transform:'translateY(0) scale(1.06,.94)', offset:.8},
+    {transform:'translateY(0) scale(1)'}
+  ], {duration:620, easing:'ease-in-out'});
+}
+function float(cls, txt, dx){
+  if (reduce) return;
+  const el = document.createElement('span'); el.className = cls; el.textContent = txt; cat.appendChild(el);
+  const a = el.animate([
+    {transform:'translate(-50%,0) scale(.4)', opacity:0},
+    {transform:`translate(calc(-50% + ${dx * .4}px),-18px) scale(1)`, opacity:1, offset:.25},
+    {transform:`translate(calc(-50% + ${dx}px),-64px) scale(.9)`, opacity:0}
+  ], {duration:1400 + Math.random() * 400, easing:easeOut});
+  a.onfinish = () => el.remove();
+}
+function hearts(n = 4){ for (let i = 0; i < n; i++) setTimeout(() => float('heart', '♥', (Math.random() - .5) * 70), i * 110); }
+function happy(){
+  rouse(); jump(); hearts();
+  cat.classList.remove('happy'); void cat.offsetWidth; cat.classList.add('happy');
+  setTimeout(() => cat.classList.remove('happy'), 1500);
+}
+// si lo tocás, ronronea
+const purrs = ['¡Miau! 💕', 'Prrrr… 😺', '¿Me das una cookie? 🍪', '¡Hoy horneamos brownies! 🍫', 'Mimos aceptados 🐾'];
+let purr = 0;
+hop.addEventListener('click', () => { happy(); say(purrs[purr++ % purrs.length]); });
+
+// si nadie lo mira un rato, ladea la cabeza y después se duerme
+let bored, sleepy, zz;
+function rouse(){
+  clearTimeout(bored); clearTimeout(sleepy); clearInterval(zz);
+  cat.classList.remove('sleep');
+  bored = setTimeout(curious, 6000);
+  sleepy = setTimeout(nap, 25000);
+}
+function curious(){
+  if (cat.classList.contains('home')) return;
+  anim(hop, [{transform:'rotate(0)'}, {transform:'rotate(-9deg)', offset:.3}, {transform:'rotate(-9deg)', offset:.7}, {transform:'rotate(0)'}], {duration:1600});
+}
+function nap(){
+  if (cat.classList.contains('home')) return;
+  cat.classList.add('sleep');
+  zz = setInterval(() => float('zz', 'z', 18 + Math.random() * 14), 1300);
+}
+addEventListener('pointermove', () => { if (cat.classList.contains('sleep')) rouse(); }, {passive:true});
+rouse();
+
+function say(t){ bubble.textContent = t; bubble.classList.add('on'); placeBubble(); clearTimeout(idle); idle = setTimeout(() => bubble.classList.remove('on'), 3200); }
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && e.target.dataset.say) say(e.target.dataset.say); }), {threshold:.45});
 document.querySelectorAll('[data-say]').forEach(el => io.observe(el));
 </script>
