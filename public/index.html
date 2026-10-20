@@ -391,7 +391,7 @@ const cat = document.getElementById('cat'), tilt = document.getElementById('tilt
       bubble = document.getElementById('bubble'), slot = document.getElementById('slot');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const easeOut = 'cubic-bezier(.16,1,.3,1)';
-let x = 0, y = 0, tx = 0, ty = 0, idle, running = false;
+let x = 0, y = 0, tx = 0, ty = 0, idle, running = false, t = 0, glued = true, stop;
 
 function calc(){
   const cw = cat.offsetWidth, ch = cat.offsetHeight, vw = innerWidth, vh = innerHeight;
@@ -406,12 +406,22 @@ function calc(){
     py = vh - ch + 6;
   }
   const s = slot.getBoundingClientRect();
-  const t = Math.min(1, Math.max(0, scrollY / (vh * .4))), e = t * t * (3 - 2 * t);
+  t = Math.min(1, Math.max(0, scrollY / (vh * .4)));
+  const e = t * t * (3 - 2 * t);
   tx = s.left * (1 - e) + px * e;
   ty = s.top * (1 - e) + py * e;
   cat.classList.toggle('home', t === 0);
-  if (t === 0 || reduce) { x = tx; y = ty; draw(0); }
+  if (t === 0) glued = true;
+  else if (t === 1) glued = false;
+  // al salir del logo va pegado al scroll: si lo persigue con retraso, en el celu se ve trabado
+  if (glued || reduce) { const dx = tx - x; x = tx; y = ty; draw(t ? dx : 0); if (t) stroll(); }
   else wake();
+}
+// mientras va pegado, camina solo mientras haya scroll
+function stroll(){
+  cat.classList.add('walk');
+  clearTimeout(stop);
+  stop = setTimeout(() => { cat.classList.remove('walk'); land(); }, 160);
 }
 function draw(dx){
   cat.style.transform = `translate(${x}px,${y}px)`;
@@ -429,7 +439,7 @@ function wake(){ if (!running && !reduce) { running = true; requestAnimationFram
 function loop(){
   const dx = tx - x, dy = ty - y;
   if (Math.abs(dx) + Math.abs(dy) < .4) {
-    x = tx; y = ty; draw(0); running = false;
+    x = tx; y = ty; draw(0); running = false; glued = t < 1;
     if (cat.classList.contains('walk')) { cat.classList.remove('walk'); land(); }
     return;
   }
