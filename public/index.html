@@ -67,6 +67,9 @@ h2{font:400 clamp(2rem,6vw,3.2rem)/1.1 var(--serif);margin-bottom:.7rem;letter-s
 .card h3{font:400 1.35rem/1.2 var(--serif)}
 .card p{font-size:.95rem;flex:1}
 .price{font-weight:500}
+.opts{display:flex;flex-wrap:wrap;gap:.4rem;margin:.2rem 0 .15rem}
+.opts button{font:inherit;font-size:.85rem;padding:.3rem .8rem;border-radius:99px;border:1.5px solid var(--rose);background:#fff;color:var(--ink-dk);cursor:pointer;transition:background .25s,color .25s}
+.opts button[aria-checked="true"]{background:var(--ink-dk);border-color:var(--ink-dk);color:#fff}
 .price small{font-weight:400;color:var(--rose-dk)}
 .card .btn{margin-top:.6rem;text-align:center;font-size:.95rem}
 .about{background:var(--rose-lt);max-width:none}
@@ -300,27 +303,39 @@ const PRODUCTS = [
   // price: precio en pesos, solo el número (ej: 4500). Con 0 se muestra "Consultar precio".
   // img: ruta de la foto real (ej: "img/brownies.webp"), cuadrada de 800 px. alt: qué se ve en la foto.
   // note: aclaración que va junto al precio (ej: "aprox."). Precios en pesos argentinos.
+  // options: si hay tamaños o presentaciones, cada una con su precio (ej: [{label:"16 cm", price:38000}, {label:"Box x6", price:27000}]).
+  //          La primera es la que aparece elegida.
   { name:"Tortas personalizadas", desc:"Para cumpleaños y eventos, con el diseño que imagines. El precio varía según el tamaño.",
     price:100000, note:"aprox. para 20 personas", emoji:"🎂", img:"img/torta.webp", alt:"Torta corazón rosa con moños, perlas y coronita" },
+  { name:"Tarta de frutillas",    desc:"Masa sablée crocante, crema y frutillas frescas, con pétalos y hojitas de oro.",
+    options:[{label:"16 cm", price:38000}, {label:"22 cm", price:48000}], emoji:"🍓", img:"img/tarta-frutillas.webp", alt:"Tarta de frutillas en rodajas con pétalos violetas y oro comestible" },
   { name:"Brownies",              desc:"Con dulce de leche, crema y frutos rojos.", price:8000,  emoji:"🍫", img:"img/brownies.webp", alt:"Brownies con dulce de leche, crema y frutos rojos" },
   { name:"Cookies",               desc:"Crocantes por fuera, blandas por dentro, llenas de chips de chocolate.", price:5000, emoji:"🍪", img:"img/cookies.webp", alt:"Cookie gigante con chips de chocolate" },
-  { name:"Cupcakes",              desc:"Esponjosos, con arándanos y crumble crocante.", price:15000, emoji:"🧁", img:"img/cupcakes.webp", alt:"Cupcakes de arándanos con crumble" },
+  { name:"Muffins",               desc:"Esponjosos, con arándanos y crumble crocante.", price:15000, emoji:"🧁", img:"img/cupcakes.webp", alt:"Muffins de arándanos con crumble" },
   { name:"Cheesecake",            desc:"Cremoso, con salsa de frutos rojos.",      price:0, emoji:"🍰", img:"" },
   { name:"Alfajores",             desc:"Rellenos de dulce de leche casero.",       price:0, emoji:"🥮", img:"" }
 ];
 /* =========================== */
 
 const $ = id => document.getElementById(id);
-const wa = t => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`;
+// api.whatsapp.com en vez de wa.me: la redirección de wa.me a veces rompe los emojis (se ven como �)
+const wa = t => `https://api.whatsapp.com/send?phone=${WHATSAPP}&text=${encodeURIComponent(t)}`;
 const money = n => '$' + n.toLocaleString('es-AR');
 const priceTxt = p => p.price > 0 ? money(p.price) + (p.note ? ` <small>${p.note}</small>` : '') : 'Consultar precio';
+// cada ítem del carrito es "producto" o "producto:opción" (ej: "1:0" = tarta de 16 cm)
+const item = k => {
+  const [i, j] = k.split(':'), p = PRODUCTS[i], o = p && p.options && p.options[j];
+  return p && (p.options ? o && {...p, name:`${p.name} (${o.label})`, price:o.price} : j === undefined && p);
+};
+const optsHtml = (p, i) => p.options ? `<div class="opts" role="radiogroup" aria-label="Tamaño de ${p.name}">${p.options.map((o, j) =>
+  `<button type="button" role="radio" aria-checked="${!j}" data-id="${i}" data-opt="${j}">${o.label}</button>`).join('')}</div>` : '';
 
 $('grid').innerHTML = PRODUCTS.map((p, i) => `
   <article class="card" data-reveal style="--d:${(i % 3) * .09}s">
     <div class="ph">${p.img ? `<img src="${p.img}" alt="${p.alt || p.name}" width="800" height="800" loading="lazy" decoding="async">` : p.emoji}</div>
     <div class="body">
-      <h3>${p.name}</h3><p>${p.desc}</p><span class="price">${priceTxt(p)}</span>
-      <button class="btn wa add" data-id="${i}">Agregar al pedido</button>
+      <h3>${p.name}</h3><p>${p.desc}</p>${optsHtml(p, i)}<span class="price">${priceTxt(item(p.options ? i + ':0' : String(i)))}</span>
+      <button class="btn wa add" data-id="${p.options ? i + ':0' : i}">Agregar al pedido</button>
     </div>
   </article>`).join('');
 const generalMsg = wa('¡Hola Magali Bakery! 🧁 Quiero hacer una consulta.');
@@ -329,16 +344,16 @@ $('yr').textContent = new Date().getFullYear();
 
 /* ====== Carrito de pedido ====== */
 let cart = {};
-try { cart = JSON.parse(localStorage.getItem('mb_cart') || '{}'); } catch (e) {}
-Object.keys(cart).forEach(k => { if (!PRODUCTS[k] || !(cart[k] > 0)) delete cart[k]; });
-const save = () => { try { localStorage.setItem('mb_cart', JSON.stringify(cart)); } catch (e) {} };
+try { cart = JSON.parse(localStorage.getItem('mb_cart2') || '{}'); } catch (e) {}
+Object.keys(cart).forEach(k => { if (!item(k) || !(cart[k] > 0)) delete cart[k]; });
+const save = () => { try { localStorage.setItem('mb_cart2', JSON.stringify(cart)); } catch (e) {} };
 const ids = () => Object.keys(cart);
-const total = () => ids().reduce((a, k) => a + PRODUCTS[k].price * cart[k], 0);
+const total = () => ids().reduce((a, k) => a + item(k).price * cart[k], 0);
 
 function orderText(){
-  const lines = ids().map(k => `• ${cart[k]} x ${PRODUCTS[k].name}` + (PRODUCTS[k].price > 0 ? ` — ${money(PRODUCTS[k].price * cart[k])}` : ''));
+  const lines = ids().map(k => `• ${cart[k]} x ${item(k).name}` + (item(k).price > 0 ? ` — ${money(item(k).price * cart[k])}` : ''));
   let t = `¡Hola Magali Bakery! 🧁 Quiero hacer este pedido:\n${lines.join('\n')}`;
-  if (total() > 0) t += `\n\nTotal estimado: ${money(total())}` + (ids().some(k => !(PRODUCTS[k].price > 0)) ? ' (+ ítems a confirmar)' : '');
+  if (total() > 0) t += `\n\nTotal estimado: ${money(total())}` + (ids().some(k => !(item(k).price > 0)) ? ' (+ ítems a confirmar)' : '');
   const name = $('fName').value.trim(), date = $('fDate').value, notes = $('fNotes').value.trim();
   t += `\n\n${$('fMode').value}` + (date ? ` para el ${date.split('-').reverse().join('/')}` : '');
   if (name) t += `\nNombre: ${name}`;
@@ -350,7 +365,7 @@ function renderCart(){
   $('cartCount').textContent = n;
   $('cartFab').classList.toggle('has', n > 0);
   $('cartItems').innerHTML = n ? ids().map(k => `
-    <div class="line"><div><strong>${PRODUCTS[k].name}</strong><br><small>${priceTxt(PRODUCTS[k])}</small></div>
+    <div class="line"><div><strong>${item(k).name}</strong><br><small>${priceTxt(item(k))}</small></div>
       <div class="qty"><button data-act="dec" data-id="${k}" aria-label="Quitar uno">−</button><span>${cart[k]}</span>
       <button data-act="inc" data-id="${k}" aria-label="Agregar uno">+</button></div></div>`).join('')
     : '<p class="empty">Todavía no agregaste nada. ¡Elegí algo rico del catálogo! 🧁</p>';
@@ -368,6 +383,14 @@ const openCart = () => {
 const closeCart = () => { $('drawer').classList.remove('open'); $('overlay').classList.remove('open'); };
 
 $('grid').addEventListener('click', e => {
+  const o = e.target.closest('.opts button');
+  if (o) {                                    // elegir tamaño: cambia el precio y lo que se agrega
+    const card = o.closest('.card'), k = `${o.dataset.id}:${o.dataset.opt}`;
+    o.parentNode.querySelectorAll('button').forEach(x => x.setAttribute('aria-checked', x === o));
+    card.querySelector('.price').innerHTML = priceTxt(item(k));
+    card.querySelector('.add').dataset.id = k;
+    return;
+  }
   const b = e.target.closest('.add'); if (!b) return;
   cart[b.dataset.id] = (cart[b.dataset.id] || 0) + 1; save(); renderCart();
   b.textContent = 'Agregado ✓'; setTimeout(() => b.textContent = 'Agregar al pedido', 1000);
