@@ -32,7 +32,7 @@
 <style>
 :root{
   --rose:#c9a09a; --rose-dk:#a8716b; --rose-lt:#f2d9d5;
-  --cream:#fff8f4; --ink:#5b3a36;
+  --cream:#fff8f4; --ink:#5b3a36; --ink-dk:#4a2c28; /* ink-dk sobre el rosa del logo: 5.3:1 */
   --serif:'Gloock',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
   --catw:clamp(84px,17vw,130px);
 }
@@ -47,7 +47,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-heigh
 .lockup h1{font:400 1em/1 var(--serif);letter-spacing:.015em;word-spacing:normal}
 #slot{position:absolute;left:50%;top:.4em;width:var(--catw);aspect-ratio:212/176;transform:translate(-50%,-100%);pointer-events:none}
 .sub{font:300 clamp(1.1rem,3.6vw,1.7rem)/1 var(--sans);letter-spacing:.7em;padding-left:.7em;margin:1rem 0 2.2rem}
-.lead{max-width:34ch;margin:0 auto 2rem;font-size:1.15rem}
+.lead{max-width:34ch;margin:0 auto 2rem;font-size:1.15rem;color:var(--ink-dk)}
 .btn{display:inline-block;font:500 1rem var(--sans);text-decoration:none;border:0;cursor:pointer;
   background:var(--cream);color:var(--ink);padding:.85rem 1.6rem;border-radius:999px;transition:transform .2s,background .2s}
 .btn:hover{transform:translateY(-2px);background:#fff}
@@ -55,11 +55,11 @@ body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-heigh
 .btn.wa:hover{background:#3f2724}
 
 /* Secciones */
-section{padding:5rem 1.25rem;max-width:1050px;margin:0 auto}
+section{padding:clamp(4.5rem,11vw,8.5rem) 1.25rem;max-width:1050px;margin:0 auto}
 h2{font:400 clamp(2rem,6vw,3.2rem)/1.1 var(--serif);margin-bottom:.7rem;letter-spacing:.01em}
 .intro{max-width:52ch;margin-bottom:2.5rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.6rem}
-.card{background:#fff;border-radius:28px 28px 18px 18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 30px -18px var(--rose-dk)}
+.card{background:#fff;border-radius:28px 28px 18px 18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 14px 34px -28px var(--rose-dk)}
 .card .ph{aspect-ratio:1;background:var(--rose-lt);display:grid;place-content:center;font-size:4rem;overflow:hidden}
 .card .ph img{width:100%;height:100%;object-fit:cover}
 .card .body{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.35rem;flex:1}
@@ -72,7 +72,8 @@ h2{font:400 clamp(2rem,6vw,3.2rem)/1.1 var(--serif);margin-bottom:.7rem;letter-s
 .about p{max-width:56ch}
 .how{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:2rem}
 .how div{border-left:3px solid var(--rose-dk);padding-left:1rem}
-footer{background:var(--rose);color:var(--cream);text-align:center;padding:3.5rem 1rem 8rem}
+footer{background:var(--rose);color:var(--ink-dk);text-align:center;padding:clamp(4.5rem,10vw,7rem) 1rem 8rem;overflow:hidden}
+.echo{font:400 clamp(5rem,26vw,17rem)/.8 var(--serif);color:var(--cream);letter-spacing:.015em;margin-top:clamp(3rem,8vw,5rem);user-select:none}
 footer p{margin-bottom:.4rem}
 footer .btn{margin-top:1rem}
 
@@ -80,9 +81,9 @@ footer .btn{margin-top:1rem}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .btn svg,.social svg{width:1.25em;height:1.25em;vertical-align:-.2em}
 .social{margin-top:1.4rem}
-.social a{display:inline-flex;gap:.5rem;align-items:center;color:var(--cream);text-underline-offset:4px}
-.btn.ghost{background:transparent;color:var(--cream);box-shadow:inset 0 0 0 2px var(--cream)}
-.btn.ghost:hover{background:rgba(255,248,244,.18)}
+.social a{display:inline-flex;gap:.5rem;align-items:center;color:var(--ink-dk);text-underline-offset:4px}
+.btn.ghost{background:transparent;color:var(--ink-dk);box-shadow:inset 0 0 0 2px var(--ink-dk)}
+.btn.ghost:hover{background:rgba(255,248,244,.35)}
 footer .row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
 footer .row .btn{margin:0}
 .fabs{position:fixed;right:16px;bottom:20px;z-index:60;display:flex;flex-direction:column;gap:12px}
@@ -106,7 +107,9 @@ footer .row .btn{margin:0}
 #drawer.open{transform:none;visibility:visible}
 .dhead{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1.2rem;border-bottom:1px solid var(--rose-lt)}
 .dhead h2{font-size:1.6rem;margin:0}
-#closeCart{background:none;border:0;font-size:1.4rem;cursor:pointer;color:var(--ink);width:44px;height:44px}
+#closeCart{background:none;border:0;cursor:pointer;color:var(--ink);width:44px;height:44px;display:grid;place-items:center;border-radius:50%}
+#closeCart:hover{background:var(--rose-lt)}
+#closeCart svg{width:22px;height:22px}
 .dbody{flex:1;overflow:auto;padding:1rem 1.2rem}
 .line{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--rose-lt)}
 .line small{color:var(--rose-dk)}
@@ -230,6 +233,7 @@ footer .row .btn{margin:0}
     <a class="btn ghost" href="https://www.instagram.com/magalibakery/" target="_blank" rel="noopener me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor"/></svg> Instagram</a>
   </div>
   <p style="margin-top:2rem;font-size:.9rem">© <span id="yr"></span> Magali Bakery</p>
+  <p class="echo" aria-hidden="true">magali</p>
 </footer>
 
 <!-- Botones flotantes -->
@@ -241,7 +245,7 @@ footer .row .btn{margin:0}
 <!-- Carrito de pedido -->
 <div id="overlay"></div>
 <aside id="drawer" role="dialog" aria-modal="true" aria-label="Tu pedido">
-  <div class="dhead"><h2>Tu pedido</h2><button id="closeCart" aria-label="Cerrar">✕</button></div>
+  <div class="dhead"><h2>Tu pedido</h2><button id="closeCart" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="dbody">
     <div id="cartItems"></div>
     <div class="dform">
