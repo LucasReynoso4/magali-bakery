@@ -62,11 +62,12 @@ h2{font:400 clamp(2rem,6vw,3.2rem)/1.1 var(--serif);margin-bottom:.7rem;letter-s
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.6rem}
 .card{background:#fff;border-radius:28px 28px 18px 18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 14px 34px -28px var(--rose-dk)}
 .card .ph{aspect-ratio:1;background:var(--rose-lt);display:grid;place-content:center;font-size:4rem;overflow:hidden}
-.card .ph img{width:100%;height:100%;object-fit:cover}
+.card .ph img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 16px 14px rgba(91,58,54,.28))}
 .card .body{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.35rem;flex:1}
 .card h3{font:400 1.35rem/1.2 var(--serif)}
 .card p{font-size:.95rem;flex:1}
 .price{font-weight:500}
+.price small{font-weight:400;color:var(--rose-dk)}
 .card .btn{margin-top:.6rem;text-align:center;font-size:.95rem}
 .about{background:var(--rose-lt);max-width:none}
 .about>div{max-width:1050px;margin:0 auto}
@@ -186,7 +187,7 @@ footer .row .btn{margin:0}
   @keyframes heroOut{to{transform:translateY(-6svh) scale(.9);opacity:.15;filter:blur(2px)}}
 }
 .flyer{position:fixed;left:0;top:0;z-index:65;pointer-events:none;font-size:3rem;line-height:1;margin:0}
-.flyer img{width:72px;height:72px;object-fit:cover;border-radius:18px}
+.flyer img{width:96px;height:96px;object-fit:contain}
 @media (prefers-reduced-motion:reduce){.js [data-reveal],.js .split .ch{opacity:1;transform:none}.hero>div{animation:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
@@ -294,24 +295,26 @@ footer .row .btn{margin:0}
 const WHATSAPP = "5491176520430"; // 54 9 + 11 7652-0430
 const PRODUCTS = [
   // price: precio en pesos, solo el número (ej: 4500). Con 0 se muestra "Consultar precio".
-  // img: ruta de la foto real (ej: "img/brownie.jpg").
-  { name:"Brownies",              desc:"Húmedos, intensos y con nueces.",          price:0, emoji:"🍫", img:"" },
-  { name:"Cookies",               desc:"Crocantes por fuera, blandas por dentro.", price:0, emoji:"🍪", img:"" },
+  // img: ruta de la foto real (ej: "img/brownies.webp"), cuadrada de 800 px. alt: qué se ve en la foto.
+  // note: aclaración que va junto al precio (ej: "aprox."). Precios en pesos argentinos.
+  { name:"Tortas personalizadas", desc:"Para cumpleaños y eventos, con el diseño que imagines. El precio varía según el tamaño.",
+    price:100000, note:"aprox. para 20 personas", emoji:"🎂", img:"img/torta.webp", alt:"Torta corazón rosa con moños, perlas y coronita" },
+  { name:"Brownies",              desc:"Con dulce de leche, crema y frutos rojos.", price:8000,  emoji:"🍫", img:"img/brownies.webp", alt:"Brownies con dulce de leche, crema y frutos rojos" },
+  { name:"Cookies",               desc:"Crocantes por fuera, blandas por dentro, llenas de chips de chocolate.", price:5000, emoji:"🍪", img:"img/cookies.webp", alt:"Cookie gigante con chips de chocolate" },
+  { name:"Cupcakes",              desc:"Esponjosos, con arándanos y crumble crocante.", price:15000, emoji:"🧁", img:"img/cupcakes.webp", alt:"Cupcakes de arándanos con crumble" },
   { name:"Cheesecake",            desc:"Cremoso, con salsa de frutos rojos.",      price:0, emoji:"🍰", img:"" },
-  { name:"Cupcakes",              desc:"Decorados a pedido, caja de 6.",           price:0, emoji:"🧁", img:"" },
-  { name:"Alfajores",             desc:"Rellenos de dulce de leche casero.",       price:0, emoji:"🥮", img:"" },
-  { name:"Tortas personalizadas", desc:"Para cumpleaños y eventos. Consultá.",     price:0, emoji:"🎂", img:"" }
+  { name:"Alfajores",             desc:"Rellenos de dulce de leche casero.",       price:0, emoji:"🥮", img:"" }
 ];
 /* =========================== */
 
 const $ = id => document.getElementById(id);
 const wa = t => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`;
 const money = n => '$' + n.toLocaleString('es-AR');
-const priceTxt = p => p.price > 0 ? money(p.price) : 'Consultar precio';
+const priceTxt = p => p.price > 0 ? money(p.price) + (p.note ? ` <small>${p.note}</small>` : '') : 'Consultar precio';
 
 $('grid').innerHTML = PRODUCTS.map((p, i) => `
   <article class="card" data-reveal style="--d:${(i % 3) * .09}s">
-    <div class="ph">${p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy">` : p.emoji}</div>
+    <div class="ph">${p.img ? `<img src="${p.img}" alt="${p.alt || p.name}" width="800" height="800" loading="lazy" decoding="async">` : p.emoji}</div>
     <div class="body">
       <h3>${p.name}</h3><p>${p.desc}</p><span class="price">${priceTxt(p)}</span>
       <button class="btn wa add" data-id="${i}">Agregar al pedido</button>
