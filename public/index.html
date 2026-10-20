@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Magali Bakery · Pastelería artesanal | Pedidos por WhatsApp</title>
-<meta name="description" content="Magali Bakery: pastelería artesanal hecha con cariño. Armá tu pedido de brownies, cookies, cheesecake, cupcakes, alfajores y tortas personalizadas y envialo por WhatsApp.">
+<meta name="description" content="Magali Bakery: pastelería artesanal hecha con cariño. Armá tu pedido de tortas personalizadas, tarta de frutillas, brownies, cookies, muffins y cheesecake y envialo por WhatsApp.">
 <meta name="theme-color" content="#c9a09a">
 <link rel="canonical" href="https://TU-DOMINIO.com/">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -310,10 +310,11 @@ const PRODUCTS = [
   { name:"Tarta de frutillas",    desc:"Masa sablée crocante, crema y frutillas frescas, con pétalos y hojitas de oro.",
     options:[{label:"16 cm", price:38000}, {label:"22 cm", price:48000}], emoji:"🍓", img:"img/tarta-frutillas.webp", alt:"Tarta de frutillas en rodajas con pétalos violetas y oro comestible" },
   { name:"Brownies",              desc:"Con dulce de leche, crema y frutos rojos.", price:8000,  emoji:"🍫", img:"img/brownies.webp", alt:"Brownies con dulce de leche, crema y frutos rojos" },
-  { name:"Cookies",               desc:"Crocantes por fuera, blandas por dentro, llenas de chips de chocolate.", price:5000, emoji:"🍪", img:"img/cookies.webp", alt:"Cookie gigante con chips de chocolate" },
-  { name:"Muffins",               desc:"Esponjosos, con arándanos y crumble crocante.", price:15000, emoji:"🧁", img:"img/cupcakes.webp", alt:"Muffins de arándanos con crumble" },
-  { name:"Cheesecake",            desc:"Cremoso, con salsa de frutos rojos.",      price:0, emoji:"🍰", img:"" },
-  { name:"Alfajores",             desc:"Rellenos de dulce de leche casero.",       price:0, emoji:"🥮", img:"" }
+  { name:"Cookies",               desc:"Crocantes por fuera, blandas por dentro, llenas de chips de chocolate.",
+    options:[{label:"Unidad", price:5000}, {label:"Box x6", price:27000}], emoji:"🍪", img:"img/cookies.webp", alt:"Cookie gigante con chips de chocolate" },
+  { name:"Muffins",               desc:"Esponjosos, con arándanos y crumble crocante.",
+    options:[{label:"Unidad", price:5000}, {label:"Box x6", price:27000}], emoji:"🧁", img:"img/cupcakes.webp", alt:"Muffins de arándanos con crumble" },
+  { name:"Cheesecake",            desc:"Cremoso, con salsa de frutos rojos.",      price:0, emoji:"🍰", img:"" }
 ];
 /* =========================== */
 
@@ -327,7 +328,7 @@ const item = k => {
   const [i, j] = k.split(':'), p = PRODUCTS[i], o = p && p.options && p.options[j];
   return p && (p.options ? o && {...p, name:`${p.name} (${o.label})`, price:o.price} : j === undefined && p);
 };
-const optsHtml = (p, i) => p.options ? `<div class="opts" role="radiogroup" aria-label="Tamaño de ${p.name}">${p.options.map((o, j) =>
+const optsHtml = (p, i) => p.options ? `<div class="opts" role="radiogroup" aria-label="Opciones de ${p.name}">${p.options.map((o, j) =>
   `<button type="button" role="radio" aria-checked="${!j}" data-id="${i}" data-opt="${j}">${o.label}</button>`).join('')}</div>` : '';
 
 $('grid').innerHTML = PRODUCTS.map((p, i) => `
